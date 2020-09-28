@@ -41,11 +41,7 @@ public class MainThread extends Thread {
 
             delta += tiempoTranscurrido / NS_POR_ACTUALIZACION;
 
-            while (delta >= 1) {
-                this.gamePanel.update();
-                aps++;
-                delta--;
-            }
+
             try{
                 canvas = this.surfaceHolder.lockCanvas();
                 synchronized (surfaceHolder){
@@ -61,6 +57,11 @@ public class MainThread extends Thread {
                         surfaceHolder.unlockCanvasAndPost(canvas);
                     }catch (Exception e){ e.printStackTrace(); }
                 }
+            }
+            while (delta >= 1) {
+                this.gamePanel.update();
+                aps++;
+                delta--;
             }
 
             if (System.nanoTime() - refernciaContador > NS_POR_SEGUNDO) {

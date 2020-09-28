@@ -78,7 +78,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         int ancho = canvas.getWidth();
         int alto = canvas.getHeight();
         Bitmap bmp= BitmapFactory.decodeResource(getResources(), R.drawable.ime);
-        canvas.drawBitmap(bmp, 0,0, null);
+        //canvas.drawBitmap(bmp, 0,0, null);
         player.draw(canvas);
         Paint pincel1 = new Paint();
         pincel1.setARGB(255, 255, 0, 0);
