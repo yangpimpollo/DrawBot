@@ -20,6 +20,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private RectPlayer player;
     private Point playerPoint;
 
+    private final Joystick joystick;
     private PlayerB playerB;
 
     public GamePanel(Context context) {
@@ -30,6 +31,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         player = new RectPlayer(new Rect(100, 100, 400, 400), Color.rgb(0, 0, 255));
         playerPoint = new Point(150, 150);
 
+        joystick = new Joystick(128, 600, 70, 40);
         playerB = new PlayerB(getContext(), 500, 500, 80);
         setFocusable(true);
     }
@@ -62,17 +64,30 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     public boolean onTouchEvent(MotionEvent event){
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
+                if(joystick.isPressed((double)event.getX(), (double)event.getY())){
+                    joystick.setIsPressed(true);
+                }
+                return true;
             case MotionEvent.ACTION_MOVE:
-                playerPoint.set((int)event.getX(), (int)event.getY());
-                playerB.setPosition((double)event.getX(), (double)event.getY());
+                if(joystick.getIsPressed()){
+                    joystick.setActuator((double)event.getX(), (double)event.getY());
+                }
+                //playerPoint.set((int)event.getX(), (int)event.getY());
+                //playerB.setPosition((double)event.getX(), (double)event.getY());
+                return true;
+            case  MotionEvent.ACTION_UP:
+                joystick.setIsPressed(false);
+                joystick.resetActuator();
+                return true;
         }
-        return true;
-        //return super.onTouchEvent(event);
+
+        return super.onTouchEvent(event);
     }
 
     public void update(){
         //player.update(playerPoint);
-        playerB.update();
+        joystick.update();
+        playerB.update(joystick);
         //Toast.makeText(this, A, Toast.LENGTH_SHORT).show();
     }
 
@@ -93,6 +108,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawText(A, 50, 50, pincel1);
         //canvas.drawRect(200,400,100,100,pincel1);
 
+        joystick.draw(canvas);
         playerB.draw(canvas);
     }
 }
