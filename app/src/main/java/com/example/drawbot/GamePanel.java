@@ -20,6 +20,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private RectPlayer player;
     private Point playerPoint;
 
+    private PlayerB playerB;
+
     public GamePanel(Context context) {
         super(context);
 
@@ -27,6 +29,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         thread = new MainThread(getHolder(), this);
         player = new RectPlayer(new Rect(100, 100, 400, 400), Color.rgb(0, 0, 255));
         playerPoint = new Point(150, 150);
+
+        playerB = new PlayerB(getContext(), 500, 500, 80);
         setFocusable(true);
     }
 
@@ -60,13 +64,15 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_MOVE:
                 playerPoint.set((int)event.getX(), (int)event.getY());
+                playerB.setPosition((double)event.getX(), (double)event.getY());
         }
         return true;
         //return super.onTouchEvent(event);
     }
 
     public void update(){
-        player.update(playerPoint);
+        //player.update(playerPoint);
+        playerB.update();
         //Toast.makeText(this, A, Toast.LENGTH_SHORT).show();
     }
 
@@ -77,14 +83,16 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         String A = thread.getA();
         int ancho = canvas.getWidth();
         int alto = canvas.getHeight();
-        Bitmap bmp= BitmapFactory.decodeResource(getResources(), R.drawable.ime);
-        //canvas.drawBitmap(bmp, 0,0, null);
-        player.draw(canvas);
+        Bitmap bmp= BitmapFactory.decodeResource(getResources(), R.drawable.ima);
+        canvas.drawBitmap(bmp, 0,0, null);
+        //player.draw(canvas);
         Paint pincel1 = new Paint();
         pincel1.setARGB(255, 255, 0, 0);
         pincel1.setTextSize(30);
         pincel1.setTypeface(Typeface.SERIF);
-        canvas.drawText(A, 0, 300, pincel1);
+        canvas.drawText(A, 50, 50, pincel1);
         //canvas.drawRect(200,400,100,100,pincel1);
+
+        playerB.draw(canvas);
     }
 }
