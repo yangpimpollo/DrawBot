@@ -3,6 +3,8 @@ package com.example.drawbot;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapRegionDecoder;
+import 	android.graphics.BitmapFactory.Options;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -12,7 +14,6 @@ import android.graphics.Typeface;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.widget.Toast;
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private MainThread thread;
@@ -98,15 +99,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         String A = thread.getA();
         int ancho = canvas.getWidth();
         int alto = canvas.getHeight();
-        Bitmap bmp= BitmapFactory.decodeResource(getResources(), R.drawable.ima);
-        canvas.drawBitmap(bmp, 0,0, null);
+        Bitmap bmp= BitmapFactory.decodeResource(getResources(), R.drawable.imu);
+        //Bitmap bmpR = new BitmapRegionDecoder(new Rect(0, 0, 32, 32),  new BitmapFactory.Options());
+        Bitmap bmpR = Bitmap.createBitmap(bmp, 84, 112, 32, 32);
+        canvas.drawBitmap(bmp, 0, 0, null);
         //player.draw(canvas);
         Paint pincel1 = new Paint();
         pincel1.setARGB(255, 255, 0, 0);
         pincel1.setTextSize(30);
         pincel1.setTypeface(Typeface.SERIF);
         canvas.drawText(A, 50, 50, pincel1);
-        //canvas.drawRect(200,400,100,100,pincel1);
+        canvas.drawRect(0,168,168,336,pincel1); // *1.75
 
         joystick.draw(canvas);
         playerB.draw(canvas);
