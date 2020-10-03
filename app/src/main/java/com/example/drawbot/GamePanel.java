@@ -19,12 +19,14 @@ import android.view.SurfaceView;
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private MainThread thread;
 
-    private RectPlayer player;
-    private Point playerPoint;
+    //private RectPlayer player;
+    //private Point playerPoint;
+
     private int he =MainActivity.he;
     private int wi =MainActivity.wi;
     private String C="wi "+wi+" | he "+he+"metrics";
 
+    private Map map;
     private final Joystick joystick;
     private PlayerB playerB;
 
@@ -33,11 +35,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         getHolder().addCallback(this);
         thread = new MainThread(getHolder(), this);
-        player = new RectPlayer(new Rect(100, 100, 400, 400), Color.rgb(0, 0, 255));
-        playerPoint = new Point(150, 150);
+        //player = new RectPlayer(new Rect(100, 100, 400, 400), Color.rgb(0, 0, 255));
+        //playerPoint = new Point(150, 150);
 
+        map = new Map(getContext(), 200, 200);
         joystick = new Joystick(128, 600, 70, 40);
-        //playerB = new PlayerB(getContext(), wi, he, 80);
         playerB = new PlayerB(getContext(), wi/2, he/2, 80);
         //System.out.println(wi+"|"+he);
         setFocusable(true);
@@ -93,6 +95,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     public void update(){
         //player.update(playerPoint);
+        map.update(joystick);
         joystick.update();
         playerB.update(joystick);
         //Toast.makeText(this, A, Toast.LENGTH_SHORT).show();
@@ -117,6 +120,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         int he = canvas.getHeight();
         String B = "wi "+wi+" | he "+he+"canvas";
 
+        map.draw(canvas);
         //canvas.drawBitmap(bmp, 0, 0, null);
         //canvas.drawBitmap(bmq, 0, 0, null);
         //player.draw(canvas);
