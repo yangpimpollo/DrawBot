@@ -38,7 +38,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         //player = new RectPlayer(new Rect(100, 100, 400, 400), Color.rgb(0, 0, 255));
         //playerPoint = new Point(150, 150);
 
-        map = new Map(getContext(), 200, 200);
+        map = new Map(getContext(), 0, 0);
         joystick = new Joystick(128, 600, 70, 40);
         playerB = new PlayerB(getContext(), wi/2, he/2, 80);
         //System.out.println(wi+"|"+he);
@@ -107,7 +107,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     Bitmap bmp= BitmapFactory.decodeResource(getResources(), R.drawable.im);
     Bitmap bmq= BitmapFactory.decodeResource(getResources(), R.drawable.ima);
     //Bitmap bmpR = new BitmapRegionDecoder(new Rect(0, 0, 32, 32),  new BitmapFactory.Options());
-    Bitmap bmpR = Bitmap.createBitmap(bmp, 84, 112, 32, 32);
+    Bitmap bmpR = Bitmap.createBitmap(bmq, 112, 56, 56, 56);
     //--------------------------------
 
     @Override
@@ -121,8 +121,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         String B = "wi "+wi+" | he "+he+"canvas";
 
         map.draw(canvas);
-        //canvas.drawBitmap(bmp, 0, 0, null);
-        //canvas.drawBitmap(bmq, 0, 0, null);
+        canvas.drawBitmap(bmq, 0, 0, null);
+        canvas.drawBitmap(bmpR, 336, 0, null);
         //player.draw(canvas);
         Paint pincel1 = new Paint();
         pincel1.setARGB(255, 255, 0, 0);
