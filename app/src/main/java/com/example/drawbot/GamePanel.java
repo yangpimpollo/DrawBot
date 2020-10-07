@@ -24,7 +24,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     private int he =MainActivity.he;
     private int wi =MainActivity.wi;
-    private String C="wi "+wi+" | he "+he+"metrics";
+    private String C="wi "+wi+" | he "+he+"metrics-db";
 
     private Map map;
     private final Joystick joystick;
@@ -40,7 +40,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         map = new Map(getContext(), 0, 0);
         joystick = new Joystick(128, 600, 70, 40);
-        playerB = new PlayerB(getContext(), wi/2, he/2, 80);
+        playerB = new PlayerB(getContext(), 0,0,wi/2, he/2, 80);
         //System.out.println(wi+"|"+he);
         setFocusable(true);
     }
@@ -118,7 +118,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         int wi = canvas.getWidth();
         int he = canvas.getHeight();
-        String B = "wi "+wi+" | he "+he+"canvas";
+        String B = "wi "+wi+" | he "+he+"canvas-db";
 
         map.draw(canvas);
         canvas.drawBitmap(bmq, 0, 0, null);
@@ -128,10 +128,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         pincel1.setARGB(255, 255, 0, 0);
         pincel1.setTextSize(30);
         pincel1.setTypeface(Typeface.SERIF);
-        canvas.drawText(A, 50, 50, pincel1);
-        canvas.drawText(B, 50, 100, pincel1);
-        canvas.drawText(C, 50, 150, pincel1);
-        //canvas.drawRect(0,168,682,336,pincel1); // *1.75
+        canvas.drawText(A, 50, 200, pincel1);
+        canvas.drawText(B, 50, 250, pincel1);
+        canvas.drawText(C, 50, 300, pincel1);
+        //canvas.drawRect(0,500,1380,550,pincel1); // *1.75
 
         joystick.draw(canvas);
         playerB.draw(canvas);
