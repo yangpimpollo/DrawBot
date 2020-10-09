@@ -10,13 +10,18 @@ import android.graphics.Typeface;
 import androidx.core.content.ContextCompat;
 
 public class PlayerB {
+    private double dpiK =MainActivity.dpi/160.0;
+    private double unitD =32*dpiK;
+    private int unit32 =((int)unitD)-1;
+    //private int unit32 =(int)unitD;
+    private String G="dpi"+dpiK+"uniD"+unitD+"unid32"+unit32;
     private double centerX;
     private double centerY;
     private double positionX;
     private double positionY;
     private double radius;
     private Paint paint;
-    private Bitmap bmB, bmBR;
+    private Bitmap bmB, bmBR, exBm;
     private Bitmap down0, down1, down2, up0, up1, up2;
     private Bitmap left0, left1, left2, right0, right1, right2;
     private int xP, yP, xV, yV, aRadI;
@@ -43,21 +48,22 @@ public class PlayerB {
         paint.setColor(color);
 
         bmB = BitmapFactory.decodeResource(context.getResources(), R.drawable.imu);
-        down0 = Bitmap.createBitmap(bmB, 56, 0, 56, 56);
-        down1 = Bitmap.createBitmap(bmB, 0, 0, 56, 56);
-        down2 = Bitmap.createBitmap(bmB, 112, 0, 56, 56);
-        left0 = Bitmap.createBitmap(bmB, 56, 56, 56, 56);
-        left1 = Bitmap.createBitmap(bmB, 0, 56, 56, 56);
-        left2 = Bitmap.createBitmap(bmB, 112, 56, 56, 56);
-        right0 = Bitmap.createBitmap(bmB, 56, 112, 56, 56);
-        right1 = Bitmap.createBitmap(bmB, 0, 112, 56, 56);
-        right2 = Bitmap.createBitmap(bmB, 112, 112, 56, 56);
-        up0 = Bitmap.createBitmap(bmB, 56, 168, 56, 56);
-        up1 = Bitmap.createBitmap(bmB, 0, 168, 56, 56);
-        up2 = Bitmap.createBitmap(bmB, 112, 168, 56, 56);
+        down0 = Bitmap.createBitmap(bmB, unit32, 0, unit32, unit32);
+        down1 = Bitmap.createBitmap(bmB, 0, 0, unit32, unit32);
+        down2 = Bitmap.createBitmap(bmB, unit32*2, 0, unit32, unit32);
+        left0 = Bitmap.createBitmap(bmB, unit32, unit32, unit32, unit32);
+        left1 = Bitmap.createBitmap(bmB, 0, unit32, unit32, unit32);
+        left2 = Bitmap.createBitmap(bmB, unit32*2, unit32, unit32, unit32);
+        right0 = Bitmap.createBitmap(bmB, unit32, unit32*2, unit32, unit32);
+        right1 = Bitmap.createBitmap(bmB, 0, unit32*2, unit32, unit32);
+        right2 = Bitmap.createBitmap(bmB, unit32*2, unit32*2, unit32, unit32);
+        up0 = Bitmap.createBitmap(bmB, unit32, unit32*3, unit32, unit32);
+        up1 = Bitmap.createBitmap(bmB, 0, unit32*3, unit32, unit32);
+        up2 = Bitmap.createBitmap(bmB, unit32*2, unit32*3, unit32, unit32);
 
         //bmBR = Bitmap.createBitmap(bmB, 56, 0, 56, 56);
         //bmBR=down0;
+        //exBm = Bitmap.createScaledBitmap(left0, unit32*2, unit32*2, false);
     }
 
     public void update(Joystick joystick) {
@@ -154,7 +160,8 @@ public class PlayerB {
         canvas.drawText(L, 50, 350, pincel1);
         canvas.drawText(M, 50, 400, pincel1);
         canvas.drawText(N, 50, 450, pincel1);
-        canvas.drawBitmap(bmBR, (float) centerX-28, (float) centerY-28, null);
+        canvas.drawBitmap(bmBR, (float) centerX-(unit32), (float) centerY-(unit32), null);
+        canvas.drawText(G, 50, 500, pincel1);
     }
 
     /*

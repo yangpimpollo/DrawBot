@@ -1,16 +1,26 @@
 package com.example.drawbot;
 
 import android.app.Activity;
+import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import androidx.annotation.RequiresApi;
+
 public class MainActivity extends Activity {
-    public static int wi,he;
+    public static int wi,he, dpi;
+    public static float xdpi, ydpi;
+    public static String displayName;
+    public static int screenHeight, screenWidth;
+    public static int wi3, he3;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +29,7 @@ public class MainActivity extends Activity {
         getDimensions();
         setContentView(new GamePanel(this));
     }
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void getDimensions(){
         /*this.wi = wi;
         this.he = he;*/
@@ -28,6 +39,19 @@ public class MainActivity extends Activity {
         //int width = displayMetrics.widthPixels;
         he = displayMetrics.heightPixels;
         wi = displayMetrics.widthPixels;
+        dpi = displayMetrics.densityDpi;
+        xdpi = displayMetrics.xdpi;
+        ydpi = displayMetrics.ydpi;
+
+        Display display = getWindowManager().getDefaultDisplay();
+        displayName = display.getName();
+        screenHeight = display.getHeight();
+        screenWidth = display.getWidth();
+
+        Point size = new Point();
+        display.getSize(size);
+        wi3 = size.x;
+        he3 = size.y;
     }
 
     //código

@@ -21,6 +21,18 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     //private RectPlayer player;
     //private Point playerPoint;
+    private int he3=MainActivity.screenHeight;
+    private int wi3=MainActivity.screenWidth;
+    private String F=MainActivity.displayName+"|wi "+wi3+" | he "+he3;
+
+    private int he2=MainActivity.screenHeight;
+    private int wi2=MainActivity.screenWidth;
+    private String E=MainActivity.displayName+"|wi "+wi2+" | he "+he2;
+
+    private int dpi =MainActivity.dpi;
+    private float xdpi =MainActivity.xdpi;
+    private float ydpi =MainActivity.ydpi;
+    private String D="dpi: "+dpi+"|x "+xdpi+"|y "+ydpi;
 
     private int he =MainActivity.he;
     private int wi =MainActivity.wi;
@@ -39,7 +51,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         //playerPoint = new Point(150, 150);
 
         map = new Map(getContext(), 0, 0);
-        joystick = new Joystick(128, 600, 70, 40);
+        joystick = new Joystick(wi-128, he-120, 70, 40);
         playerB = new PlayerB(getContext(), 0,0,wi/2, he/2, 80);
         //System.out.println(wi+"|"+he);
         setFocusable(true);
@@ -132,6 +144,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawText(B, 50, 250, pincel1);
         canvas.drawText(C, 50, 300, pincel1);
         //canvas.drawRect(0,500,1380,550,pincel1); // *1.75
+        canvas.drawText(D, 600, 50, pincel1);
+        canvas.drawText(E, 600, 100, pincel1);
+        canvas.drawText(F, 600, 150, pincel1);
 
         joystick.draw(canvas);
         playerB.draw(canvas);

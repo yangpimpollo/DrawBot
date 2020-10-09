@@ -18,6 +18,9 @@ public class Map {
 
     private int he =MainActivity.he;
     private int wi =MainActivity.wi;
+    private double dpiK =MainActivity.dpi/160.0;
+    private double unitD =32*dpiK;
+    private int unit32 =(int)unitD;
 
 
     public Map(Context context, double positionX, double positionY){
@@ -26,7 +29,7 @@ public class Map {
 
         bmp= BitmapFactory.decodeResource(context.getResources(), R.drawable.im);
         bmq= BitmapFactory.decodeResource(context.getResources(), R.drawable.imdes);
-        bmpR = Bitmap.createBitmap(bmq, 0, 56, 56, 56);
+        bmpR = Bitmap.createBitmap(bmq, 0,  unit32, unit32, unit32);
     }
 
     public void update(Joystick joystick) {
@@ -38,9 +41,9 @@ public class Map {
 
     public void draw(Canvas canvas) {
         //canvas.drawBitmap(bmp, (float) positionX, (float) positionY, null);
-        for (int y=0; y<(this.he/56)+1; y++){
-            for (int x=0; x<(this.wi/56)+3; x++){
-                canvas.drawBitmap(bmpR, (float) positionX+x*56, (float) positionY+y*56, null);
+        for (int y=0; y<(this.he/unit32)+1; y++){
+            for (int x=0; x<(this.wi/unit32)+3; x++){
+                canvas.drawBitmap(bmpR, (float) positionX+x*unit32, (float) positionY+y*unit32, null);
             }
         }
     }
