@@ -17,8 +17,10 @@ public class PlayerB {
     private String G="dpi"+dpiK+"uniD"+unitD+"unid32"+unit32;
     private double centerX;
     private double centerY;
-    private double positionX;
-    private double positionY;
+    private double positionX=690;
+    private double positionY=360;
+    private double MyPositionX;
+    private double MyPositionY;
     private double radius;
     private Paint paint;
     private Bitmap bmB, bmBR, exBm;
@@ -68,16 +70,21 @@ public class PlayerB {
     }
 
     public void update(Joystick joystick) {
+
         velocityX = joystick.getActuatorX()*MAX_SPEED;
         velocityY = joystick.getActuatorY()*MAX_SPEED;
         positionX += velocityX;
         positionY += velocityY;
+        MyPositionX=positionX+(centerX*2)-(unit32);
+        MyPositionY=positionY+(centerY*2)-(unit32);
         aRad = Math.atan(velocityY/velocityX);
         a2Rad = Math.acos(velocityX/(Math.sqrt((velocityX*velocityX)+(velocityY*velocityY))));
         aSex = (velocityY<0) ? (int)((a2Rad*180.0)/PI) : (int)(360.0-((a2Rad*180.0)/PI));
         aRadI=(int)aRad;
         xP=(int)positionX;
         yP=(int)positionY;
+        //xP=(int)MyPositionX;
+        //yP=(int)MyPositionY;
         xV=(int)velocityX;
         yV=(int)velocityY;
         L="x: "+xP+"| y: "+yP;
@@ -163,8 +170,16 @@ public class PlayerB {
         canvas.drawText(L, 50, 350, pincel1);
         canvas.drawText(M, 50, 400, pincel1);
         canvas.drawText(N, 50, 450, pincel1);
-        canvas.drawBitmap(bmBR, (float) centerX-(unit32), (float) centerY-(unit32), null);
+        canvas.drawBitmap(bmBR, (float) centerX-(unit32/2), (float) centerY-(unit32/2), null);
         canvas.drawText(G, 50, 500, pincel1);
+        Paint pincel2 = new Paint();
+        pincel2.setARGB(255, 0, 0, 0);
+        pincel2.setStrokeWidth(1);
+        pincel2.setStyle(Paint.Style.STROKE);
+        canvas.drawRect((float) centerX-(unit32/2),(float) centerY-(unit32/2),(float) centerX+(unit32/2),(float) centerY+(unit32/2),pincel2);
+        canvas.drawLine(0,0, (float)centerX*2, (float)centerY*2, pincel2);
+        canvas.drawLine((float)centerX*2, 0, 0,(float)centerY*2, pincel2);
+        canvas.drawRect((float)(positionX+140)/2,(float)(positionY+140)/2, (float)(positionX+1500)/2, (float)(positionY+800)/2, pincel2);
     }
 
     /*
