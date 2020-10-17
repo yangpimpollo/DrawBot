@@ -26,6 +26,7 @@ public class PlayerB {
     private Bitmap left0, left1, left2, right0, right1, right2;
     private int xP, yP, xV, yV, aRadI;
     private double aRad;
+    private double a2Rad, aSex;
     private double velocityX;
     private double velocityY;
     private static final double SPEED_PIXELS_PER_SECOND = 400;
@@ -72,6 +73,8 @@ public class PlayerB {
         positionX += velocityX;
         positionY += velocityY;
         aRad = Math.atan(velocityY/velocityX);
+        a2Rad = Math.acos(velocityX/(Math.sqrt((velocityX*velocityX)+(velocityY*velocityY))));
+        aSex = (velocityY<0) ? (int)((a2Rad*180.0)/PI) : (int)(360.0-((a2Rad*180.0)/PI));
         aRadI=(int)aRad;
         xP=(int)positionX;
         yP=(int)positionY;
@@ -79,7 +82,7 @@ public class PlayerB {
         yV=(int)velocityY;
         L="x: "+xP+"| y: "+yP;
         M="x: "+xV+"| y: "+yV;
-        N="vector: "+aRad;
+        N="vector: "+aSex;
         if(xV!= 0 || yV!= 0){
             moving=true;
         }else {
