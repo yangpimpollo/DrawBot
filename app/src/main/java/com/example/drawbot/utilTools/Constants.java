@@ -3,12 +3,14 @@ package com.example.drawbot.utilTools;
 import com.example.drawbot.MainActivity;
 
 public class Constants {
-    //public static int wi,he, dpi;
-    public static float xdpi, ydpi;
-    public static String displayName;
-    public static int screenHeight, screenWidth;
-    public static int wi3, he3;
+    public static final String screen_Name = MainActivity.displayName;
+    public static final int screen_Width = MainActivity.wi;
+    public static final int screen_Height = MainActivity.he;
+    public static final int screen_DPI = MainActivity.dpi;
 
-    private int he = MainActivity.he;
-    private int wi = MainActivity.wi;
+    public static final double dpi_Multiple = screen_DPI/160.0;
+    public static final int unit32 = (int) (32*dpi_Multiple);   // unit_32Pixel
+
+    public static final double PI = Math.PI;
+
 }

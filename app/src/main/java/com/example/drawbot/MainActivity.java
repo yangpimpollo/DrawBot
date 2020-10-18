@@ -16,8 +16,8 @@ public class MainActivity extends Activity {
     public static int wi,he, dpi;
     public static float xdpi, ydpi;
     public static String displayName;
-    public static int screenHeight, screenWidth;
-    public static int wi3, he3;
+    //public static int screenHeight, screenWidth;
+    //public static int wi3, he3;
 
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -31,12 +31,8 @@ public class MainActivity extends Activity {
     }
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void getDimensions(){
-        /*this.wi = wi;
-        this.he = he;*/
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        //int height = displayMetrics.heightPixels;
-        //int width = displayMetrics.widthPixels;
         he = displayMetrics.heightPixels;
         wi = displayMetrics.widthPixels;
         dpi = displayMetrics.densityDpi;
@@ -45,13 +41,14 @@ public class MainActivity extends Activity {
 
         Display display = getWindowManager().getDefaultDisplay();
         displayName = display.getName();
+        /*
         screenHeight = display.getHeight();
         screenWidth = display.getWidth();
-
         Point size = new Point();
         display.getSize(size);
         wi3 = size.x;
         he3 = size.y;
+         */
     }
 
     //código

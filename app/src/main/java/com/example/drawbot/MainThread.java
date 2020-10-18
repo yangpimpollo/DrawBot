@@ -2,7 +2,6 @@ package com.example.drawbot;
 
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
-import android.widget.Toast;
 
 public class MainThread extends Thread {
     private SurfaceHolder surfaceHolder;
@@ -65,12 +64,7 @@ public class MainThread extends Thread {
             }
 
             if (System.nanoTime() - refernciaContador > NS_POR_SEGUNDO) {
-                /*CONTADOR_APS = "APS : " + aps;
-                CONTADOR_FPS = "FPS : " + fps;
-                // ventana.setTitle(NOMBRE + " || APS : " + aps + " || FPS : " + fps);*/
-                //System.out.println("APS : " + aps + "  || FPS : " + fps);
-                A = "APS : " + aps + "  || FPS : " + fps;
-                //Toast.makeText(gamePanel, A, Toast.LENGTH_SHORT).show();
+                A = "APS : " + aps + "  | FPS : " + fps;
                 aps = 0;
                 fps = 0;
                 refernciaContador = System.nanoTime();
