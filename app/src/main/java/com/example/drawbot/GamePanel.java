@@ -21,7 +21,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private Sprites sprites;
     private Map map;
     private final Joystick joystick;
-    private PlayerB playerB;
+    private PlayerB playerB;private PlayerC playerC;
 
     public GamePanel(Context context) {
         super(context);
@@ -30,9 +30,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         thread = new MainThread(getHolder(), this);
 
         sprites = new Sprites(getContext());
-        map = new Map(0, 0);
+        map = new Map(Constants.Center_X, Constants.Center_Y);
         joystick = new Joystick(Constants.screen_Width-128, Constants.screen_Height-120, 70, 40);
-        playerB = new PlayerB(0,0, Constants.screen_Width/2, Constants.screen_Height/2);
+        playerB = new PlayerB(Constants.Center_X, Constants.Center_Y);
+        //playerC = new PlayerC();
         setFocusable(true);
     }
 
@@ -88,6 +89,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         map.update(joystick);
         joystick.update();
         playerB.update(joystick);
+        //playerC.update(joystick);
     }
 
     @Override
@@ -108,5 +110,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         joystick.draw(canvas);
         playerB.draw(canvas);
+        //playerC.draw(canvas);
     }
 }

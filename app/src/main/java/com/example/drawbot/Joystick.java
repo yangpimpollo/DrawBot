@@ -4,6 +4,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import com.example.drawbot.utilTools.Constants;
+
 public class Joystick {
     private Paint outerCirclePaint;
     private Paint innerCirclePaint;
@@ -17,6 +19,7 @@ public class Joystick {
     private boolean isPressed;
     private double actuatorX;
     private double actuatorY;
+    private double angleRad, angleSex;
 
     public  Joystick(int centerPositionX, int centerPositionY, int outerCircleRadius, int innerCircleRadius){
         outerCircleCenterPositionX = centerPositionX;
@@ -73,6 +76,8 @@ public class Joystick {
             actuatorX = deltaX/deltaDistance;
             actuatorY = deltaY/deltaDistance;
         }
+        angleRad = Math.acos((actuatorX)/(Math.sqrt((actuatorX*actuatorX)+(actuatorY*actuatorY))));
+        angleSex = (actuatorY<0) ? (int)((angleRad*180.0)/ Constants.PI) : (int)(360.0-((angleRad*180.0)/Constants.PI));
     }
 
     public void resetActuator() {
@@ -80,11 +85,8 @@ public class Joystick {
         actuatorY = 0;
     }
 
-    public double getActuatorX() {
-        return actuatorX;
-    }
-
-    public double getActuatorY() {
-        return actuatorY;
-    }
+    public double getAngle() { return angleRad; }
+    public double getSexAngle() { return angleSex; }
+    public double getActuatorX() { return actuatorX; }
+    public double getActuatorY() { return actuatorY; }
 }
