@@ -9,10 +9,12 @@ import com.example.drawbot.utilTools.Constants;
 import com.example.drawbot.utilTools.Sprites;
 
 public class PlayerC {
-    //private double positionX;
-    //private double positionY;
+    private double positionX=100;
+    private double positionY=100;
     private double initPositionX=Constants.Center_X;
     private double initPositionY=Constants.Center_Y;
+    private double worldPositionX;    //  世界與焦點差異 origin  | point relative to screen
+    private double worldPositionY;
     private double velocityX;
     private double velocityY;
     private Bitmap bmBR;
@@ -21,8 +23,10 @@ public class PlayerC {
     private char direction='s';
     private boolean moving=false;
     private int animacion;
+    private Map map;
 
-    public PlayerC(){
+    public PlayerC(Map map){
+        this.map = map;
         /*this.positionX = positionX;
         this.positionY = positionY;*/
 
@@ -30,14 +34,16 @@ public class PlayerC {
 
     public void update(Joystick joystick) {
 
-        /*if(initPositionX<550){
-            velocityX=0;
-        }else{*/
+        worldPositionX = map.getWorldPositionX();
+        worldPositionY = map.getWorldPositionY();
+        if(positionX-5<0){
+            joystick.setOn();
+        }
         velocityX = joystick.getActuatorX()*Constants.MAX_SPEED;
         velocityY = joystick.getActuatorY()*Constants.MAX_SPEED;//}
-        initPositionX += velocityX;
-        initPositionY += velocityY;
-        N="x: "+(int)initPositionX+"| y: "+(int)initPositionY;
+        positionX += velocityX;
+        positionY += velocityY;
+        N="x: "+(int)positionX+"| y: "+(int)positionY+"PayerC P";
         aSex=joystick.getSexAngle();
         O="vector: "+aSex;
         if(velocityX!= 0 || velocityY!= 0){
@@ -128,6 +134,7 @@ public class PlayerC {
         //canvas.drawText(M, 50, 400, pincel1);
         canvas.drawText(N, 50, 450, pincel1);
         canvas.drawText(O, 50, 500, pincel1);
+        canvas.drawCircle((float)worldPositionX,(float)worldPositionY,10,pincel1);
         canvas.drawBitmap(bmBR, (float) Constants.Center_X-(Constants.unit32/2), (float) Constants.Center_Y-(Constants.unit32/2), null);
 
         Paint pincel2 = new Paint();

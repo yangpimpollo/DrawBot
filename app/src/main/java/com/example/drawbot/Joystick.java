@@ -17,8 +17,11 @@ public class Joystick {
     private  int innerCircleCenterPositionY;
     private double joystickCenterToTouchDistance;
     private boolean isPressed;
+    private boolean joystickOn=true;
     private double actuatorX;
     private double actuatorY;
+    private double actuatorValueX;
+    private double actuatorValueY;
     private double angleRad, angleSex;
 
     public  Joystick(int centerPositionX, int centerPositionY, int outerCircleRadius, int innerCircleRadius){
@@ -69,12 +72,20 @@ public class Joystick {
         double deltaY = touchPositionY-outerCircleCenterPositionY;
         double deltaDistance = Math.sqrt(Math.pow(deltaX,2)+Math.pow(deltaY,2));
 
-        if(deltaDistance < outerCircleRadius){
-            actuatorX = deltaX/outerCircleRadius;
-            actuatorY = deltaY/outerCircleRadius;
+        if (deltaDistance < outerCircleRadius) {
+            actuatorX = deltaX / outerCircleRadius;
+            actuatorY = deltaY / outerCircleRadius;
+        } else {
+            actuatorX = deltaX / deltaDistance;
+            actuatorY = deltaY / deltaDistance;
+        }
+
+        if (joystickOn){
+            actuatorValueX = actuatorX;
+            actuatorValueY = actuatorY;
         }else {
-            actuatorX = deltaX/deltaDistance;
-            actuatorY = deltaY/deltaDistance;
+            actuatorValueX = 0;
+            actuatorValueY = 0;
         }
         angleRad = Math.acos((actuatorX)/(Math.sqrt((actuatorX*actuatorX)+(actuatorY*actuatorY))));
         angleSex = (actuatorY<0) ? (int)((angleRad*180.0)/ Constants.PI) : (int)(360.0-((angleRad*180.0)/Constants.PI));
@@ -83,10 +94,15 @@ public class Joystick {
     public void resetActuator() {
         actuatorX = 0;
         actuatorY = 0;
+        angleRad = 0;
+        angleSex = 0;
+        actuatorValueX = 0;
+        actuatorValueY = 0;
     }
 
     public double getAngle() { return angleRad; }
     public double getSexAngle() { return angleSex; }
-    public double getActuatorX() { return actuatorX; }
-    public double getActuatorY() { return actuatorY; }
+    public double getActuatorX() { return actuatorValueX; }
+    public double getActuatorY() { return actuatorValueY; }
+    public void setOn(){ joystickOn=false;}
 }
