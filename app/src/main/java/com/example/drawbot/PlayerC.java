@@ -36,7 +36,15 @@ public class PlayerC {
 
         worldPositionX = map.getWorldPositionX();
         worldPositionY = map.getWorldPositionY();
-        if(positionX-5<0){
+        if(positionX-5<0) {
+            joystick.setOff('e');
+        }else if(positionX+5>500) {
+            joystick.setOff('o');
+        }else if(positionY-5<0) {
+            joystick.setOff('n');
+        }else if(positionY+5>300) {
+            joystick.setOff('s');
+        }else{
             joystick.setOn();
         }
         velocityX = joystick.getActuatorX()*Constants.MAX_SPEED;
@@ -144,7 +152,7 @@ public class PlayerC {
         canvas.drawRect((float) Constants.Center_X-(Constants.unit32/2),(float) Constants.Center_Y-(Constants.unit32/2),(float) Constants.Center_X+(Constants.unit32/2),(float) Constants.Center_Y+(Constants.unit32/2),pincel2);
         canvas.drawLine(0,0, (float)Constants.screen_Width, (float)Constants.screen_Height, pincel2);
         canvas.drawLine((float)Constants.screen_Width, 0, 0,(float)Constants.screen_Height, pincel2);
-        //canvas.drawRect((float)(positionX+140)/2,(float)(positionY+140)/2, (float)(positionX+1500)/2, (float)(positionY+800)/2, pincel2);
+        canvas.drawRect((float)worldPositionX,(float)worldPositionY, (float)worldPositionX+500, (float)worldPositionY+300, pincel2);
     }
 
     /*

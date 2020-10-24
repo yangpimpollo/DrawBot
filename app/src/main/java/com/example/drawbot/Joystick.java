@@ -22,6 +22,7 @@ public class Joystick {
     private double actuatorY;
     private double actuatorValueX;
     private double actuatorValueY;
+    private char direction;
     private double angleRad, angleSex;
 
     public  Joystick(int centerPositionX, int centerPositionY, int outerCircleRadius, int innerCircleRadius){
@@ -84,8 +85,21 @@ public class Joystick {
             actuatorValueX = actuatorX;
             actuatorValueY = actuatorY;
         }else {
-            actuatorValueX = 0;
-            actuatorValueY = 0;
+            if (direction=='n'){
+                actuatorValueX = actuatorX;
+                actuatorValueY = (actuatorY<0) ? 0 : actuatorY;
+            }else if (direction=='s'){
+                actuatorValueX = actuatorX;
+                actuatorValueY = (actuatorY>0) ? 0 : actuatorY;
+            }else if (direction=='e'){
+                actuatorValueX = (actuatorX<0) ? 0 : actuatorX;
+                actuatorValueY = actuatorY;
+            }else if (direction=='o'){
+                actuatorValueX = (actuatorX>0) ? 0 : actuatorX;
+                actuatorValueY = actuatorY;
+            }
+            //actuatorValueX = 0;
+            //actuatorValueY = 0;
         }
         angleRad = Math.acos((actuatorX)/(Math.sqrt((actuatorX*actuatorX)+(actuatorY*actuatorY))));
         angleSex = (actuatorY<0) ? (int)((angleRad*180.0)/ Constants.PI) : (int)(360.0-((angleRad*180.0)/Constants.PI));
@@ -104,5 +118,9 @@ public class Joystick {
     public double getSexAngle() { return angleSex; }
     public double getActuatorX() { return actuatorValueX; }
     public double getActuatorY() { return actuatorValueY; }
-    public void setOn(){ joystickOn=false;}
+    public void setOff(char direction){
+        this.direction = direction;
+        joystickOn=false;
+    }
+    public void setOn() { joystickOn=true; }
 }
