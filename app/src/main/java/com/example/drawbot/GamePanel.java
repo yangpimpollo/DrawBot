@@ -86,8 +86,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void update(){
-        map.update(joystick);
+
         joystick.update();
+        map.update(joystick);
         //playerB.update(joystick);
         playerC.update(joystick);
     }

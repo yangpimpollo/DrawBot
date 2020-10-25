@@ -36,21 +36,33 @@ public class PlayerC {
 
         worldPositionX = map.getWorldPositionX();
         worldPositionY = map.getWorldPositionY();
-        if(positionX-5<0) {
-            joystick.setOff('e');
-        }else if(positionX+5>500) {
-            joystick.setOff('o');
-        }else if(positionY-5<0) {
+        velocityX = joystick.getActuatorX()*Constants.MAX_SPEED;
+        velocityY = joystick.getActuatorY()*Constants.MAX_SPEED;
+        positionX += velocityX;
+        positionY += velocityY;/*
+        if((int)positionX+(int)velocityX<0) {
+            if((int)positionY+(int)velocityY<0) {
+                joystick.setOff('a');
+            }else if((int)positionY+(int)velocityY>300) {
+                joystick.setOff('c');
+            }else {
+                joystick.setOff('e');
+            }
+        }else if((int)positionX+(int)velocityX>500) {
+            if((int)positionY+(int)velocityY>300) {
+                joystick.setOff('d');
+            }else if((int)positionY+(int)velocityY<0) {
+                joystick.setOff('b');
+            }else {
+                joystick.setOff('o');
+            }
+        }else if((int)positionY+(int)velocityY<0) {
             joystick.setOff('n');
-        }else if(positionY+5>300) {
+        }else if((int)positionY+(int)velocityY>300) {
             joystick.setOff('s');
         }else{
             joystick.setOn();
-        }
-        velocityX = joystick.getActuatorX()*Constants.MAX_SPEED;
-        velocityY = joystick.getActuatorY()*Constants.MAX_SPEED;//}
-        positionX += velocityX;
-        positionY += velocityY;
+        }*/
         N="x: "+(int)positionX+"| y: "+(int)positionY+"PayerC P";
         aSex=joystick.getSexAngle();
         O="vector: "+aSex;

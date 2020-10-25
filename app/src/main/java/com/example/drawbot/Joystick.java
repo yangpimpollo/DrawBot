@@ -23,7 +23,7 @@ public class Joystick {
     private double actuatorValueX;
     private double actuatorValueY;
     private char direction;
-    private double angleRad, angleSex;
+    private double angleRad, angleSex;private String K;
 
     public  Joystick(int centerPositionX, int centerPositionY, int outerCircleRadius, int innerCircleRadius){
         outerCircleCenterPositionX = centerPositionX;
@@ -80,29 +80,42 @@ public class Joystick {
             actuatorX = deltaX / deltaDistance;
             actuatorY = deltaY / deltaDistance;
         }
-
-        if (joystickOn){
-            actuatorValueX = actuatorX;
-            actuatorValueY = actuatorY;
-        }else {
-            if (direction=='n'){
-                actuatorValueX = actuatorX;
-                actuatorValueY = (actuatorY<0) ? 0 : actuatorY;
-            }else if (direction=='s'){
-                actuatorValueX = actuatorX;
-                actuatorValueY = (actuatorY>0) ? 0 : actuatorY;
-            }else if (direction=='e'){
-                actuatorValueX = (actuatorX<0) ? 0 : actuatorX;
-                actuatorValueY = actuatorY;
-            }else if (direction=='o'){
-                actuatorValueX = (actuatorX>0) ? 0 : actuatorX;
-                actuatorValueY = actuatorY;
-            }
-            //actuatorValueX = 0;
-            //actuatorValueY = 0;
-        }
         angleRad = Math.acos((actuatorX)/(Math.sqrt((actuatorX*actuatorX)+(actuatorY*actuatorY))));
         angleSex = (actuatorY<0) ? (int)((angleRad*180.0)/ Constants.PI) : (int)(360.0-((angleRad*180.0)/Constants.PI));
+
+        if (!joystickOn){/*
+            if (direction=='n'){
+                actuatorValueX = actuatorX;
+                actuatorValueY = (actuatorY<0) ? 0 : actuatorY;K="n";
+            }else if (direction=='s'){
+                actuatorValueX = actuatorX;
+                actuatorValueY = (actuatorY>0) ? 0 : actuatorY;K="s";
+            }else if (direction=='e'){
+                actuatorValueX = (actuatorX<0) ? 0 : actuatorX;K="e";
+                actuatorValueY = actuatorY;
+            }else if (direction=='o'){
+                actuatorValueX = (actuatorX>0) ? 0 : actuatorX;K="o";
+                actuatorValueY = actuatorY;
+            }else if (direction=='a'){  //norte-este
+                actuatorValueX = (actuatorX<0) ? 0 : actuatorX;K="a-ne";
+                actuatorValueY = (actuatorY<0) ? 0 : actuatorY;
+            }else if (direction=='b'){  //norte-oeste
+                actuatorValueX = (actuatorX>0) ? 0 : actuatorX;K="b-no";
+                actuatorValueY = (actuatorY<0) ? 0 : actuatorY;
+            }else if (direction=='c'){  //sur-este
+                actuatorValueX = (actuatorX<0) ? 0 : actuatorX;K="c-se";
+                actuatorValueY = (actuatorY>0) ? 0 : actuatorY;
+            }else if (direction=='d'){  //sur-oeste
+                actuatorValueX = (actuatorX>0) ? 0 : actuatorX;K="d-so";
+                actuatorValueY = (actuatorY>0) ? 0 : actuatorY;
+            }*/
+            //actuatorValueX = 0;
+            //actuatorValueY = 0;
+        }else {
+            actuatorValueX = actuatorX;
+            actuatorValueY = actuatorY;
+            K = "on";
+        }
     }
 
     public void resetActuator() {
@@ -121,6 +134,34 @@ public class Joystick {
     public void setOff(char direction){
         this.direction = direction;
         joystickOn=false;
+        setOffCases(direction);
     }
-    public void setOn() { joystickOn=true; }
+    public void setOffCases(char m){
+        if (m=='n'){
+            actuatorValueX = actuatorX;
+            actuatorValueY = (actuatorY<0) ? 0 : actuatorY;K="n";
+        }else if (m=='s'){
+            actuatorValueX = actuatorX;
+            actuatorValueY = (actuatorY>0) ? 0 : actuatorY;K="s";
+        }else if (m=='e'){
+            actuatorValueX = (actuatorX<0) ? 0 : actuatorX;K="e";
+            actuatorValueY = actuatorY;
+        }else if (m=='o'){
+            actuatorValueX = (actuatorX>0) ? 0 : actuatorX;K="o";
+            actuatorValueY = actuatorY;
+        }else if (m=='a'){  //norte-este
+            actuatorValueX = (actuatorX<0) ? 0 : actuatorX;K="a-ne";
+            actuatorValueY = (actuatorY<0) ? 0 : actuatorY;
+        }else if (m=='b'){  //norte-oeste
+            actuatorValueX = (actuatorX>0) ? 0 : actuatorX;K="b-no";
+            actuatorValueY = (actuatorY<0) ? 0 : actuatorY;
+        }else if (m=='c'){  //sur-este
+            actuatorValueX = (actuatorX<0) ? 0 : actuatorX;K="c-se";
+            actuatorValueY = (actuatorY>0) ? 0 : actuatorY;
+        }else if (m=='d'){  //sur-oeste
+            actuatorValueX = (actuatorX>0) ? 0 : actuatorX;K="d-so";
+            actuatorValueY = (actuatorY>0) ? 0 : actuatorY;
+        }
+    }
+    public void setOn() { joystickOn=true; }public boolean getJoystickOn(){return joystickOn;}public String getK(){return K;}
 }

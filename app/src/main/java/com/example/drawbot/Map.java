@@ -16,7 +16,9 @@ public class Map {
     private double drawPositionY;     //  畫位置 myPosition relative to screen
     private double velocityX;         //
     private double velocityY;         //  origin: W; myPosition: P; drawPosition: Dp
-    private String L, M;              //       (  W = Dp-P  )
+    private String K, L, M;              //       (  W = Dp-P  )
+    private double JpositionX = 100;
+    private double JpositionY = 100;
 
     private double x1, y1, x2, y2;
 
@@ -43,7 +45,34 @@ public class Map {
         worldPositionY = drawPositionY-positionY;
         //worldPositionX += velocityX;
         //worldPositionY += velocityY;
+        JpositionX += velocityX;
+        JpositionY += velocityY;
+        if((int)JpositionX+(int)velocityX<0) {
+            if((int)JpositionY+(int)velocityY<0) {
+                joystick.setOff('a');//K="a-ne";
+            }else if((int)JpositionY+(int)velocityY>300) {
+                joystick.setOff('c');//K="c-se";
+            }else {
+                joystick.setOff('e');//K="e";
+            }
+        }else if((int)JpositionX+(int)velocityX>500) {
+            if((int)JpositionY+(int)velocityY>300) {
+                joystick.setOff('d');//K="d-so";
+            }else if((int)JpositionY+(int)velocityY<0) {
+                joystick.setOff('b');//K="b-no";
+            }else {
+                joystick.setOff('o');//K="o";
+            }
+        }else if((int)JpositionY+(int)velocityY<0) {
+            joystick.setOff('n');//K="n";
+        }else if((int)JpositionY+(int)velocityY>300) {
+            joystick.setOff('s');//K="s";
+        }else{
+            joystick.setOn();
 
+        }
+
+        K="direction: "+joystick.getK()+"| : "+joystick.getJoystickOn();
         L="x: "+(int)drawPositionX+"| y: "+(int)drawPositionY+"Map Dp";
         M="x: "+(int)velocityX+"| y: "+(int)velocityY;
 
@@ -64,6 +93,7 @@ public class Map {
         pincel1.setARGB(255, 255, 0, 255);
         pincel1.setTextSize(30);
         pincel1.setTypeface(Typeface.SERIF);
+        canvas.drawText(K, 50, 300, pincel1);
         canvas.drawText(L, 50, 350, pincel1);
         canvas.drawText(M, 50, 400, pincel1);
         canvas.drawCircle((float)worldPositionX,(float)worldPositionY,20,pincel1);

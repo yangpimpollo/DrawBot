@@ -17,7 +17,7 @@ public class Constants {
     public static final double PI = Math.PI;
 
 
-    public static final double SPEED_PIXELS_PER_SECOND = 200;
+    public static final double SPEED_PIXELS_PER_SECOND = 150;
     public static final double MAX_SPEED = SPEED_PIXELS_PER_SECOND/60;
 
 }
