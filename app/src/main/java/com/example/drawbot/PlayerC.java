@@ -165,6 +165,7 @@ public class PlayerC {
         canvas.drawLine(0,0, (float)Constants.screen_Width, (float)Constants.screen_Height, pincel2);
         canvas.drawLine((float)Constants.screen_Width, 0, 0,(float)Constants.screen_Height, pincel2);
         canvas.drawRect((float)worldPositionX,(float)worldPositionY, (float)worldPositionX+500, (float)worldPositionY+300, pincel2);
+        canvas.drawRect((float)worldPositionX+300,(float)worldPositionY+100, (float)worldPositionX+400, (float)worldPositionY+200, pincel2);
     }
 
     /*

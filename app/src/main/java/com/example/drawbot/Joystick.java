@@ -22,7 +22,7 @@ public class Joystick {
     private double actuatorY;
     private double actuatorValueX;
     private double actuatorValueY;
-    private char direction;
+    private char direction, Kon;
     private double angleRad, angleSex;private String K;
 
     public  Joystick(int centerPositionX, int centerPositionY, int outerCircleRadius, int innerCircleRadius){
@@ -83,39 +83,6 @@ public class Joystick {
         angleRad = Math.acos((actuatorX)/(Math.sqrt((actuatorX*actuatorX)+(actuatorY*actuatorY))));
         angleSex = (actuatorY<0) ? (int)((angleRad*180.0)/ Constants.PI) : (int)(360.0-((angleRad*180.0)/Constants.PI));
 
-        if (!joystickOn){/*
-            if (direction=='n'){
-                actuatorValueX = actuatorX;
-                actuatorValueY = (actuatorY<0) ? 0 : actuatorY;K="n";
-            }else if (direction=='s'){
-                actuatorValueX = actuatorX;
-                actuatorValueY = (actuatorY>0) ? 0 : actuatorY;K="s";
-            }else if (direction=='e'){
-                actuatorValueX = (actuatorX<0) ? 0 : actuatorX;K="e";
-                actuatorValueY = actuatorY;
-            }else if (direction=='o'){
-                actuatorValueX = (actuatorX>0) ? 0 : actuatorX;K="o";
-                actuatorValueY = actuatorY;
-            }else if (direction=='a'){  //norte-este
-                actuatorValueX = (actuatorX<0) ? 0 : actuatorX;K="a-ne";
-                actuatorValueY = (actuatorY<0) ? 0 : actuatorY;
-            }else if (direction=='b'){  //norte-oeste
-                actuatorValueX = (actuatorX>0) ? 0 : actuatorX;K="b-no";
-                actuatorValueY = (actuatorY<0) ? 0 : actuatorY;
-            }else if (direction=='c'){  //sur-este
-                actuatorValueX = (actuatorX<0) ? 0 : actuatorX;K="c-se";
-                actuatorValueY = (actuatorY>0) ? 0 : actuatorY;
-            }else if (direction=='d'){  //sur-oeste
-                actuatorValueX = (actuatorX>0) ? 0 : actuatorX;K="d-so";
-                actuatorValueY = (actuatorY>0) ? 0 : actuatorY;
-            }*/
-            //actuatorValueX = 0;
-            //actuatorValueY = 0;
-        }else {
-            actuatorValueX = actuatorX;
-            actuatorValueY = actuatorY;
-            K = "on";
-        }
     }
 
     public void resetActuator() {
@@ -127,10 +94,31 @@ public class Joystick {
         actuatorValueY = 0;
     }
 
-    public double getAngle() { return angleRad; }
-    public double getSexAngle() { return angleSex; }
-    public double getActuatorX() { return actuatorValueX; }
-    public double getActuatorY() { return actuatorValueY; }
+    public void setOn() {
+        joystickOn=true;
+        actuatorValueX = actuatorX;
+        actuatorValueY = actuatorY;
+        K = "on";
+        if (angleSex>=67.5&&angleSex<112.5){
+            Kon='n';
+        }else if(angleSex>=112.5&&angleSex<157.5){
+            Kon='a';
+        }else if(angleSex>=157.5&&angleSex<202.5){
+            Kon='e';
+        }else if(angleSex>=202.5&&angleSex<247.5){
+            Kon='c';
+        }else if(angleSex>=247.5&&angleSex<292.5){
+            Kon='s';
+        }else if(angleSex>=292.5&&angleSex<337.5){
+            Kon='d';
+        }else if(angleSex>=337.5&&angleSex<360||angleSex>0&&angleSex<22.5){
+            Kon='o';
+        }else if(angleSex>=22.5&&angleSex<67.5){
+            Kon='b';
+        }else{
+            Kon='x';
+        }
+    }
     public void setOff(char direction){
         this.direction = direction;
         joystickOn=false;
@@ -163,5 +151,12 @@ public class Joystick {
             actuatorValueY = (actuatorY>0) ? 0 : actuatorY;
         }
     }
-    public void setOn() { joystickOn=true; }public boolean getJoystickOn(){return joystickOn;}public String getK(){return K;}
+
+    public double getAngle() { return angleRad; }
+    public double getSexAngle() { return angleSex; }
+    public double getActuatorX() { return actuatorValueX; }
+    public double getActuatorY() { return actuatorValueY; }
+    public boolean getJoystickOn(){ return joystickOn; }
+    public String getK(){ return K; }
+    public char getKon(){ return Kon; }
 }

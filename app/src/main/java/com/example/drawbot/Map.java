@@ -47,32 +47,40 @@ public class Map {
         //worldPositionY += velocityY;
         JpositionX += velocityX;
         JpositionY += velocityY;
+        /*if ((int)JpositionX+(int)velocityX>300){
+            joystick.setOff(joystick.getKon());
+        }else{
+            joystick.setOn();
+        }*/
         if((int)JpositionX+(int)velocityX<0) {
             if((int)JpositionY+(int)velocityY<0) {
-                joystick.setOff('a');//K="a-ne";
+                joystick.setOff('a');
             }else if((int)JpositionY+(int)velocityY>300) {
-                joystick.setOff('c');//K="c-se";
+                joystick.setOff('c');
             }else {
-                joystick.setOff('e');//K="e";
+                joystick.setOff('e');
             }
         }else if((int)JpositionX+(int)velocityX>500) {
             if((int)JpositionY+(int)velocityY>300) {
-                joystick.setOff('d');//K="d-so";
+                joystick.setOff('d');
             }else if((int)JpositionY+(int)velocityY<0) {
-                joystick.setOff('b');//K="b-no";
+                joystick.setOff('b');
             }else {
-                joystick.setOff('o');//K="o";
+                joystick.setOff('o');
             }
         }else if((int)JpositionY+(int)velocityY<0) {
-            joystick.setOff('n');//K="n";
+            joystick.setOff('n');
         }else if((int)JpositionY+(int)velocityY>300) {
-            joystick.setOff('s');//K="s";
+            joystick.setOff('s');
         }else{
-            joystick.setOn();
-
+            if(collision()){
+                joystick.setOff(joystick.getKon());
+            }else {
+                joystick.setOn();
+            }
         }
 
-        K="direction: "+joystick.getK()+"| : "+joystick.getJoystickOn();
+        K="direction: "+joystick.getK()+"| : "+joystick.getJoystickOn()+"| : "+joystick.getKon();
         L="x: "+(int)drawPositionX+"| y: "+(int)drawPositionY+"Map Dp";
         M="x: "+(int)velocityX+"| y: "+(int)velocityY;
 
@@ -102,6 +110,15 @@ public class Map {
 
     public double getWorldPositionX(){ return worldPositionX; }
     public double getWorldPositionY(){ return worldPositionY; }
+
+    public boolean collision(){
+        if(JpositionX-Constants.unit32_05<400&& JpositionX+Constants.unit32_05>300&&
+           JpositionY-Constants.unit32_05<200&& JpositionY+Constants.unit32_05>100){
+            return true;
+        }else {
+            return false;
+        }
+    }
 
     /*public void setPosition(double positionX, double positionY) {
         this.positionX = positionX;

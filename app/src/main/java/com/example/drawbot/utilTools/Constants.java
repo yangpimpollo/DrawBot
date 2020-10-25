@@ -13,6 +13,7 @@ public class Constants {
 
     public static final double dpi_Multiple = screen_DPI/160.0;
     public static final int unit32 = (int) (32*dpi_Multiple);   // unit_32Pixel
+    public static final int unit32_05 = (int) (unit32/2);
 
     public static final double PI = Math.PI;
 
