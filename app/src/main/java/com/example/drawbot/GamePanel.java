@@ -14,6 +14,7 @@ import com.example.drawbot.utilTools.Sprites;
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private MainThread thread;
+    private boolean noPause = true;
 
     private static final String B = Constants.screen_Name+"|wi "+Constants.screen_Width+" | he "+Constants.screen_Height;
     private static final String C ="dpi: "+Constants.screen_DPI+"|kdpi: "+Constants.dpi_Multiple+"|unit32: "+Constants.unit32;
@@ -44,18 +45,32 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        thread = new MainThread(getHolder(), this);
-        thread.setRunning(true);
-        thread.start();
+        if (noPause) {
+            thread = new MainThread(getHolder(), this);
+            thread.setRunning(true);
+            thread.start();
+        }
     }
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
+        //boolean retry = true;
+        noPause=false;
+        /*while(true){
+            try{
+                thread.setRunning(false);
+                //thread.join();
+            }catch(Exception e){ e.printStackTrace(); }
+            retry = false;
+        }*/
+    }
+
+    public void Destroy(){
         boolean retry = true;
         while(true){
             try{
                 thread.setRunning(false);
-                thread.join();
+                //thread.join();
             }catch(Exception e){ e.printStackTrace(); }
             retry = false;
         }

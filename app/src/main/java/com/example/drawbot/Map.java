@@ -74,7 +74,7 @@ public class Map {
             joystick.setOff('s');
         }else{
             if(collision()){
-                joystick.setOff(joystick.getKon());
+                joystick.setOff(joystick.getKon2());
             }else {
                 joystick.setOn();
             }

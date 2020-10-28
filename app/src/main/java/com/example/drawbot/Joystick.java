@@ -22,7 +22,7 @@ public class Joystick {
     private double actuatorY;
     private double actuatorValueX;
     private double actuatorValueY;
-    private char direction, Kon;
+    private char direction, Kon, Kon2;
     private double angleRad, angleSex;private String K;
 
     public  Joystick(int centerPositionX, int centerPositionY, int outerCircleRadius, int innerCircleRadius){
@@ -118,6 +118,18 @@ public class Joystick {
         }else{
             Kon='x';
         }
+        //-----------------------------------
+        if (angleSex>=45&&angleSex<135){
+            Kon2='n';
+        }else if (angleSex>=135&&angleSex<225){
+            Kon2='e';
+        }else if (angleSex>=225&&angleSex<315){
+            Kon2='s';
+        }else if (angleSex>=315&&angleSex<360||angleSex>=0&&angleSex<45){
+            Kon2='o';
+        }else{
+            Kon2='x';
+        }
     }
     public void setOff(char direction){
         this.direction = direction;
@@ -159,4 +171,5 @@ public class Joystick {
     public boolean getJoystickOn(){ return joystickOn; }
     public String getK(){ return K; }
     public char getKon(){ return Kon; }
+    public char getKon2(){ return Kon2; }
 }
