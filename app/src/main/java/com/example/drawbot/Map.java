@@ -52,7 +52,8 @@ public class Map {
         }else{
             joystick.setOn();
         }*/
-        if((int)JpositionX+(int)velocityX<0) {
+        //-------------------------collider----------------------------------------------
+        /*if((int)JpositionX+(int)velocityX<0) {
             if((int)JpositionY+(int)velocityY<0) {
                 joystick.setOff('a');
             }else if((int)JpositionY+(int)velocityY>300) {
@@ -78,8 +79,9 @@ public class Map {
             }else {
                 joystick.setOn();
             }
-        }
-
+        }*/
+        joystick.setOn();
+        //-------------------------collider----------------------------------------------
         K="direction: "+joystick.getK()+"| : "+joystick.getJoystickOn()+"| : "+joystick.getKon();
         L="x: "+(int)drawPositionX+"| y: "+(int)drawPositionY+"Map Dp";
         M="x: "+(int)velocityX+"| y: "+(int)velocityY;

@@ -7,11 +7,11 @@ import com.example.drawbot.Joystick;
 public abstract class State {
 
 
-    void update(Joystick joystick) {
+    protected void update(Joystick joystick) {
 
     }
 
-    void draw(Canvas canvas) {
+    protected void draw(Canvas canvas) {
 
     }
 }

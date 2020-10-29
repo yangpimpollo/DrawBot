@@ -119,6 +119,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         String A = thread.getA();
 
            //map.draw(canvas);
+        gsm.draw(canvas);
 
         Paint pincel1 = new Paint();
         pincel1.setARGB(255, 255, 0, 0);
@@ -128,7 +129,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawText(B, 50, 100, pincel1);
         canvas.drawText(C, 50, 150, pincel1);
 
-        gsm.draw(canvas);
+
         joystick.draw(canvas);
         //playerB.draw(canvas);
            //playerC.draw(canvas);

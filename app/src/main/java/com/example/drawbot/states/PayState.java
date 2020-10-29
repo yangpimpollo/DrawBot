@@ -17,13 +17,13 @@ public class PayState extends State {
         playerC = new PlayerC(map);
     }
 
-    //@Override
+    @Override
     public void update(Joystick joystick) {
         map.update(joystick);
         playerC.update(joystick);
     }
 
-    //@Override
+    @Override
     public void draw(Canvas canvas) {
         map.draw(canvas);
         playerC.draw(canvas);
