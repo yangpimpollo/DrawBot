@@ -2,10 +2,16 @@ package com.example.drawbot.states;
 
 import android.graphics.Canvas;
 
-public interface State {
+import com.example.drawbot.Joystick;
+
+public abstract class State {
 
 
-    public void update();
+    void update(Joystick joystick) {
 
-    public void draw(Canvas canvas);
+    }
+
+    void draw(Canvas canvas) {
+
+    }
 }

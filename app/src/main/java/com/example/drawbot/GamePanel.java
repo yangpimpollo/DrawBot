@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.example.drawbot.states.GameStateManager;
 import com.example.drawbot.utilTools.Constants;
 import com.example.drawbot.utilTools.Sprites;
 
@@ -20,9 +21,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private static final String C ="dpi: "+Constants.screen_DPI+"|kdpi: "+Constants.dpi_Multiple+"|unit32: "+Constants.unit32;
 
     private Sprites sprites;
-    private Map map;
+       //private Map map;
     private final Joystick joystick;
-    private PlayerB playerB;private PlayerC playerC;
+       //private PlayerB playerB;private PlayerC playerC;
+    private GameStateManager gsm;
 
     public GamePanel(Context context) {
         super(context);
@@ -31,10 +33,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         thread = new MainThread(getHolder(), this);
 
         sprites = new Sprites(getContext());
-        map = new Map(Constants.Center_X, Constants.Center_Y);
+           //map = new Map(Constants.Center_X, Constants.Center_Y);
         joystick = new Joystick(Constants.screen_Width-128, Constants.screen_Height-120, 70, 40);
         //playerB = new PlayerB(Constants.Center_X, Constants.Center_Y);
-        playerC = new PlayerC(map);
+           //playerC = new PlayerC(map);
+        gsm = new GameStateManager();
         setFocusable(true);
     }
 
@@ -103,9 +106,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     public void update(){
 
         joystick.update();
-        map.update(joystick);
+           //map.update(joystick);
         //playerB.update(joystick);
-        playerC.update(joystick);
+           //playerC.update(joystick);
+        gsm.update(joystick);
     }
 
     @Override
@@ -114,7 +118,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawColor(Color.WHITE);
         String A = thread.getA();
 
-        map.draw(canvas);
+           //map.draw(canvas);
 
         Paint pincel1 = new Paint();
         pincel1.setARGB(255, 255, 0, 0);
@@ -124,8 +128,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawText(B, 50, 100, pincel1);
         canvas.drawText(C, 50, 150, pincel1);
 
+        gsm.draw(canvas);
         joystick.draw(canvas);
         //playerB.draw(canvas);
-        playerC.draw(canvas);
+           //playerC.draw(canvas);
     }
 }

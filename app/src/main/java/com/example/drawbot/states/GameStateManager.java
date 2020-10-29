@@ -2,9 +2,11 @@ package com.example.drawbot.states;
 
 import android.graphics.Canvas;
 
+import com.example.drawbot.Joystick;
+
 public class GameStateManager {
 
-    private static State currentState = null;
+    private static State currentState = new PayState();
 
     public GameStateManager(){
 
@@ -14,8 +16,8 @@ public class GameStateManager {
         currentState = newState;
     }
 
-    public void update(){
-        currentState.update();
+    public void update(Joystick joystick){
+        currentState.update(joystick);
     }
     public void draw(Canvas canvas){
         currentState.draw(canvas);
