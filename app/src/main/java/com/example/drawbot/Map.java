@@ -22,6 +22,11 @@ public class Map {
 
     private double x1, y1, x2, y2;
 
+    private String[] partes;
+    private int[] paleta;
+    private int ancho;
+    private int alto;
+
     public Map(double drawPositionX, double drawPositionY){
         this.drawPositionX = drawPositionX;
         this.drawPositionY = drawPositionY;
@@ -29,6 +34,17 @@ public class Map {
         positionY = 100;
         //worldPositionX = positionX+drawPositionX;
         //worldPositionY = positionY+drawPositionY;
+
+        String contenido = Constants.TileMap1;
+        partes = contenido.split("#");
+        ancho = Integer.parseInt(partes[0]);
+        alto = Integer.parseInt(partes[1]);
+        paleta = new int[ancho*alto];
+        String mapStringAll = partes[2];
+        String[] mapPieces = mapStringAll.split("-");
+        for (int i=0; i<mapPieces.length; i++){
+            paleta[i] = Integer.parseInt(mapPieces[i]);
+        }
     }
 
     public void update(Joystick joystick) {
@@ -53,16 +69,16 @@ public class Map {
             joystick.setOn();
         }*/
         //-------------------------collider----------------------------------------------
-        /*if((int)JpositionX+(int)velocityX<0) {
+        if((int)JpositionX+(int)velocityX<0) {
             if((int)JpositionY+(int)velocityY<0) {
                 joystick.setOff('a');
-            }else if((int)JpositionY+(int)velocityY>300) {
+            }else if((int)JpositionY+(int)velocityY>900) {
                 joystick.setOff('c');
             }else {
                 joystick.setOff('e');
             }
-        }else if((int)JpositionX+(int)velocityX>500) {
-            if((int)JpositionY+(int)velocityY>300) {
+        }else if((int)JpositionX+(int)velocityX>1500) {
+            if((int)JpositionY+(int)velocityY>900) {
                 joystick.setOff('d');
             }else if((int)JpositionY+(int)velocityY<0) {
                 joystick.setOff('b');
@@ -71,7 +87,7 @@ public class Map {
             }
         }else if((int)JpositionY+(int)velocityY<0) {
             joystick.setOff('n');
-        }else if((int)JpositionY+(int)velocityY>300) {
+        }else if((int)JpositionY+(int)velocityY>900) {
             joystick.setOff('s');
         }else{
             if(collision()){
@@ -79,11 +95,11 @@ public class Map {
             }else {
                 joystick.setOn();
             }
-        }*/
-        joystick.setOn();
+        }
+        //joystick.setOn();
         //-------------------------collider----------------------------------------------
         K="direction: "+joystick.getK()+"| : "+joystick.getJoystickOn()+"| : "+joystick.getKon();
-        L="x: "+(int)drawPositionX+"| y: "+(int)drawPositionY+"Map Dp";
+        L="x: "+(int)drawPositionX+"| y: "+(int)drawPositionY+"Map Dp-";
         M="x: "+(int)velocityX+"| y: "+(int)velocityY;
 
         x1 = 0+worldPositionX;
@@ -94,11 +110,20 @@ public class Map {
 
     public void draw(Canvas canvas) {
         //.drawBitmap(Sprites.bmp, (float) positionX, (float) positionY, null); //farol Test
+        /*
         for (int y=0; y<(Constants.screen_Height/Constants.unit32)+1; y++){
             for (int x=0; x<(Constants.screen_Width/Constants.unit32)+3; x++){
-                canvas.drawBitmap(Sprites.bmpR, (float) drawPositionX+x*Constants.unit32, (float) drawPositionY+y*Constants.unit32, null);
+                canvas.drawBitmap(Sprites.getBitmap(4), (float) drawPositionX+x*Constants.unit32, (float) drawPositionY+y*Constants.unit32, null);
+            }
+        }*/
+        int i=0;
+        for (int y=0; y<alto; y++){
+            for (int x=0; x<ancho; x++){
+                canvas.drawBitmap(Sprites.getBitmap(paleta[i]), (float) drawPositionX+x*Constants.unit32, (float) drawPositionY+y*Constants.unit32, null);
+                i++;
             }
         }
+
         Paint pincel1 = new Paint();
         pincel1.setARGB(255, 255, 0, 255);
         pincel1.setTextSize(30);
