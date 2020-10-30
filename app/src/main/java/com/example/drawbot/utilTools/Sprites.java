@@ -40,10 +40,14 @@ public class Sprites {
         //------Build tileMap
         //TileMap1 = context.getResources().getString(R.string.map);
 
-        tm01 = Bitmap.createBitmap(bmq, 0,  0, Constants.unit32, Constants.unit32);
+        /*tm01 = Bitmap.createBitmap(bmq, 0,  0, Constants.unit32, Constants.unit32);
         tm02 = Bitmap.createBitmap(bmq, 0,  Constants.unit32*1, Constants.unit32, Constants.unit32);
         tm03 = Bitmap.createBitmap(bmq, 0,  Constants.unit32*2, Constants.unit32, Constants.unit32);
-        tm04 = Bitmap.createBitmap(bmq, 0,  Constants.unit32*3, Constants.unit32, Constants.unit32);
+        tm04 = Bitmap.createBitmap(bmq, 0,  Constants.unit32*3, Constants.unit32, Constants.unit32);*/
+        tm01=BitmapFactory.decodeResource(context.getResources(), R.drawable.t01);
+        tm02=BitmapFactory.decodeResource(context.getResources(), R.drawable.t02);
+        tm03=BitmapFactory.decodeResource(context.getResources(), R.drawable.t03);
+        tm04=BitmapFactory.decodeResource(context.getResources(), R.drawable.t04);
         tm05 = Bitmap.createBitmap(bmq, 0,  Constants.unit32*4, Constants.unit32, Constants.unit32);
         tm06 = Bitmap.createBitmap(bmq, 0,  Constants.unit32*5, Constants.unit32, Constants.unit32);
 

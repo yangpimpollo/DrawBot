@@ -2,8 +2,12 @@ package com.example.drawbot;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 
+import androidx.constraintlayout.solver.widgets.Rectangle;
+
+import com.example.drawbot.utilTools.ABbox;
 import com.example.drawbot.utilTools.Constants;
 import com.example.drawbot.utilTools.Sprites;
 
@@ -26,6 +30,9 @@ public class Map {
     private int[] paleta;
     private int ancho;
     private int alto;
+
+    private ABbox playerBox=new ABbox();
+    //private ABbox a1=new ABbox(300, 100, 100, 100);
 
     public Map(double drawPositionX, double drawPositionY){
         this.drawPositionX = drawPositionX;
@@ -68,6 +75,9 @@ public class Map {
         }else{
             joystick.setOn();
         }*/
+        //playerBox=new Rect((int)JpositionX-Constants.unit32_05, (int)JpositionY-Constants.unit32_05,
+        // (int)JpositionX+Constants.unit32_05, (int)JpositionY+Constants.unit32_05);
+        playerBox.setValue((int)JpositionX-Constants.unit32_05, (int)JpositionY-Constants.unit32_05, Constants.unit32, Constants.unit32);
         //-------------------------collider----------------------------------------------
         if((int)JpositionX+(int)velocityX<0) {
             if((int)JpositionY+(int)velocityY<0) {
@@ -91,7 +101,7 @@ public class Map {
             joystick.setOff('s');
         }else{
             if(collision()){
-                joystick.setOff(joystick.getKon2());
+                joystick.setOff(joystick.getKon());
             }else {
                 joystick.setOn();
             }
@@ -139,13 +149,32 @@ public class Map {
     public double getWorldPositionY(){ return worldPositionY; }
 
     public boolean collision(){
-        if(JpositionX-Constants.unit32_05<400&& JpositionX+Constants.unit32_05>300&&
-           JpositionY-Constants.unit32_05<200&& JpositionY+Constants.unit32_05>100){
+        /*if(JpositionX-Constants.unit32_05<400&& JpositionX+Constants.unit32_05>300&&
+           JpositionY-Constants.unit32_05<200&& JpositionY+Constants.unit32_05>100){*/
+        if (vectorCollider()>0){
             return true;
         }else {
             return false;
         }
     }
+
+    public int vectorCollider(){
+        int k=0;
+        for (int i=0; i<ABLayer.allBoxes.size(); i++){
+            boolean a = playerBox.intersect(ABLayer.allBoxes.get(i));
+            if (a){ k++; }
+        }
+        return k;
+    }
+/*
+    public  boolean unitColision(Rectangle r){
+        if(JpositionX-Constants.unit32_05<400&& JpositionX+Constants.unit32_05>300&&
+                JpositionY-Constants.unit32_05<200&& JpositionY+Constants.unit32_05>100){
+            return true;
+        }else {
+            return false;
+        }
+    }*/
 
     /*public void setPosition(double positionX, double positionY) {
         this.positionX = positionX;

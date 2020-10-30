@@ -6,7 +6,7 @@ import com.example.drawbot.Joystick;
 
 public class GameStateManager {
 
-    private static State currentState = new LoadState();
+    private static State currentState = new PayState();
 
     public GameStateManager(){
 
