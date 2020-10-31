@@ -79,7 +79,7 @@ public class Map {
         // (int)JpositionX+Constants.unit32_05, (int)JpositionY+Constants.unit32_05);
         playerBox.setValue((int)JpositionX-Constants.unit32_05, (int)JpositionY-Constants.unit32_05, Constants.unit32, Constants.unit32);
         //-------------------------collider----------------------------------------------
-        if((int)JpositionX+(int)velocityX<0) {
+        /*if((int)JpositionX+(int)velocityX<0) {
             if((int)JpositionY+(int)velocityY<0) {
                 joystick.setOff('a');
             }else if((int)JpositionY+(int)velocityY>900) {
@@ -100,6 +100,15 @@ public class Map {
         }else if((int)JpositionY+(int)velocityY>900) {
             joystick.setOff('s');
         }else{
+            if(collision()){
+                joystick.setOff(joystick.getKon());
+            }else {
+                joystick.setOn();
+            }
+        }*/
+        if(!playerBox.contains(ABLayer.a0)){
+            joystick.setOff(joystick.getKon());
+        }else {
             if(collision()){
                 joystick.setOff(joystick.getKon());
             }else {

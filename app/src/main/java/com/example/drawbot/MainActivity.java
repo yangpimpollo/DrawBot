@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         getDimensions();
         setContentView(Gp = new GamePanel(this));
-        Toast.makeText(this, "OnCreate", Toast.LENGTH_SHORT).show();
+          //Toast.makeText(this, "OnCreate", Toast.LENGTH_SHORT).show();
     }
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void getDimensions(){
@@ -77,7 +77,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-        Toast.makeText(this, "OnStart", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "OnStart", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -88,23 +88,23 @@ public class MainActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        Toast.makeText(this, "OnPause", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "OnPause", Toast.LENGTH_SHORT).show();
     }
     @Override
     protected void onStop() {
         super.onStop();
-        Toast.makeText(this, "OnStop", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "OnStop", Toast.LENGTH_SHORT).show();
     }
     @Override
     protected void onRestart() {
         super.onRestart();
-        Toast.makeText(this, "OnRestart", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "OnRestart", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Toast.makeText(this, "OnDestroy", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "OnDestroy", Toast.LENGTH_SHORT).show();
         Gp.Destroy();
     }
 }

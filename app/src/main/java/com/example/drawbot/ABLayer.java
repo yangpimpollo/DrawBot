@@ -5,6 +5,7 @@ import android.graphics.Paint;
 
 import com.example.drawbot.utilTools.ABbox;
 import com.example.drawbot.utilTools.Constants;
+import com.example.drawbot.utilTools.Sprites;
 
 import java.util.ArrayList;
 
@@ -12,6 +13,7 @@ public class ABLayer {
 
     public static ArrayList<ABbox> allBoxes = new ArrayList<ABbox>();
 
+    public static ABbox a0=new ABbox(0, 0, 1500, 900);
     public static ABbox a1=new ABbox(300, 100, 100, 100);
     public static ABbox a2=new ABbox(430, 100, 200, 300);
     public static ABbox a3=new ABbox(500, 500, 100, 100);
@@ -20,16 +22,35 @@ public class ABLayer {
     private double worldPositionX;
     private double worldPositionY;
 
+    private int[] paleta;
+
     public ABLayer(){
-        allBoxes.add(a1);
+        /*allBoxes.add(a1);
         allBoxes.add(a2);
         allBoxes.add(a3);
-        allBoxes.add(a4);
+        allBoxes.add(a4);*/
+
+        paleta = new int[540];
+        String[] mapABPieces = Constants.ABMap1.split("-");
+        for (int i=0; i<mapABPieces.length; i++){
+            paleta[i] = Integer.parseInt(mapABPieces[i]);
+        }
+
+        int i=0;
+        for (int y=0; y<18; y++){
+            for (int x=0; x<30; x++){
+                if(paleta[i]==1){
+                    allBoxes.add(new ABbox(100+x*Constants.unit32, 100+y*Constants.unit32, Constants.unit32, Constants.unit32));
+                }
+                i++;
+            }
+        }
     }
 
     public void update(Map map){
         worldPositionX=map.getWorldPositionX();
         worldPositionY=map.getWorldPositionY();
+
     }
 
     public void draw(Canvas canvas){

@@ -22,7 +22,11 @@ public class ABbox {
     }
 
     public boolean contains(ABbox box){
-        return false;
+        if(x>box.getX() && x+width<box.getX2() && y>box.getY() && y+height<box.getY2()){
+            return true;
+        }else {
+            return false;
+        }
     }
 
     public boolean intersect(ABbox box){
